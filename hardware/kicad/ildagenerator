@@ -1,0 +1,86 @@
+Source,/Users/janerik/Dropbox/Laser/ILDA/kicad/ildagenerator.sch
+Kicad Rev,Eeschema (2015-07-29 BZR 6016)-product
+Generated Date,Freitag, 07. August 2015 16:10:24
+
+Title,ILDA Output
+Company,Not Set
+Revision,0.1
+Date Issue,9 aug 2014
+
+Reference,Value,Library,Library Ref
+P8,CONN_4,ildagenerator-cache,CONN_4
+P7,CONN_6,ildagenerator-cache,CONN_6
+U1,LTC2656BIFE-L16,ildagenerator-cache,LTC2656BIFE-L16
+C1,0.1µF,ildagenerator-rescue,C-RESCUE-ildagenerator
+C2,0.1µF,ildagenerator-rescue,C-RESCUE-ildagenerator
+U2,LT1356CN,ildagenerator-cache,LT1356CN
+R3,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R4,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R1,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R2,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+P1,Out X,ildagenerator-cache,CONN_2
+R5,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R6,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+P2,Out Y,ildagenerator-cache,CONN_2
+R7,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R8,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+U3,LT1356CN,ildagenerator-cache,LT1356CN
+R17,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R21,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R19,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R23,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+P3,Out Red,ildagenerator-cache,CONN_2
+R18,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R22,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R20,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R24,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+P4,Out Green,ildagenerator-cache,CONN_2
+U4,LT1356CN,ildagenerator-cache,LT1356CN
+R25,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R29,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R27,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R31,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+P5,Out Blue,ildagenerator-cache,CONN_2
+R26,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R30,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R28,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R32,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+P6,Out C1,ildagenerator-cache,CONN_2
+R13,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R34,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R35,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R33,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R14,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R36,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R39,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R42,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R15,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R37,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R40,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R43,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R16,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R38,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R41,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R44,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R52,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R51,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R50,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R49,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R48,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R47,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R46,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R45,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R12,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R11,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R10,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R9,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R56,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R55,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R54,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+R53,10kΩ,ildagenerator-rescue,R-RESCUE-ildagenerator
+1µF1,CP,device,CP
+1µF2,CP,device,CP
+1µF3,CP,device,CP
+1µF4,CP,device,CP
+1µF5,CP,device,CP
+1µF6,CP,device,CP

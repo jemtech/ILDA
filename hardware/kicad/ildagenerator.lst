@@ -1,0 +1,97 @@
+eeschema (2011-05-25)-stable  >> Creation date: Sa 09 Aug 2014 11:26:11 CEST
+
+#Cmp ( Sortiert nach Referenz )
+| C1         0.1µF      
+| C2         0.1µF      
+| P1         Out X       
+| P2         Out Y       
+| P3         Out Red     
+| P4         Out Green   
+| P5         Out Blue    
+| P6         Out C1      
+| R1         10kΩ       
+| R2         10kΩ       
+| R3         10kΩ       
+| R4         10kΩ       
+| R5         10kΩ       
+| R6         10kΩ       
+| R7         10kΩ       
+| R8         10kΩ       
+| R9         40kΩ       
+| R10        40kΩ       
+| R11        40kΩ       
+| R12        40kΩ       
+| R13        40kΩ       
+| R14        40kΩ       
+| R15        40kΩ       
+| R16        40kΩ       
+| R17        10kΩ       
+| R18        10kΩ       
+| R19        10kΩ       
+| R20        10kΩ       
+| R21        10kΩ       
+| R22        10kΩ       
+| R23        10kΩ       
+| R24        10kΩ       
+| R25        10kΩ       
+| R26        10kΩ       
+| R27        10kΩ       
+| R28        10kΩ       
+| R29        10kΩ       
+| R30        10kΩ       
+| R31        10kΩ       
+| R32        10kΩ       
+| U1         LTC2656BIFE-L16
+| U2         LT1356CN    
+| U3         LT1356CN    
+| U4         LT1356CN    
+#Ende Cmp
+
+#Cmp ( Sortiert nach Wert )
+| 0.1µF       C1        
+| 0.1µF       C2        
+| 10kΩ        R1        
+| 10kΩ        R2        
+| 10kΩ        R3        
+| 10kΩ        R4        
+| 10kΩ        R5        
+| 10kΩ        R6        
+| 10kΩ        R7        
+| 10kΩ        R8        
+| 10kΩ        R17       
+| 10kΩ        R18       
+| 10kΩ        R19       
+| 10kΩ        R20       
+| 10kΩ        R21       
+| 10kΩ        R22       
+| 10kΩ        R23       
+| 10kΩ        R24       
+| 10kΩ        R25       
+| 10kΩ        R26       
+| 10kΩ        R27       
+| 10kΩ        R28       
+| 10kΩ        R29       
+| 10kΩ        R30       
+| 10kΩ        R31       
+| 10kΩ        R32       
+| 40kΩ        R9        
+| 40kΩ        R10       
+| 40kΩ        R11       
+| 40kΩ        R12       
+| 40kΩ        R13       
+| 40kΩ        R14       
+| 40kΩ        R15       
+| 40kΩ        R16       
+| LT1356CN     U2        
+| LT1356CN     U3        
+| LT1356CN     U4        
+| LTC2656BIFE-L16 U1        
+| Out Blue     P5        
+| Out C1       P6        
+| Out Green    P4        
+| Out Red      P3        
+| Out X        P1        
+| Out Y        P2        
+#Ende Cmp
+
+#Ende der Liste
