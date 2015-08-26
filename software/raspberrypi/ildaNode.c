@@ -4,16 +4,21 @@
 #include "ltc2656.h"
 #include "ildaNode.h"
 
+void initILDA(){
+	initLtc2656();
+}
+
+void moveTo(float x, float y){
+	setChVal_float(CH_X, x);
+	setChVal_float(CH_Y, y);
+	
+	executeValues();
+}
+
 void cicle(){
 	float gerad = M_PI / 180.0;
 	for(float i =0.0; i < 360.0; i++){
-		unsigned char x = sin(gerad*i)*127.0 + 128;
-                unsigned char y = cos(gerad*i)*127.0 + 128;
-
-                setChVal(CH_X, x, 0);
-                setChVal(CH_Y, y, 0);
-
-                executeValues(); 
+		moveTo(sin(gerad*i), cos(gerad*i));
         }
 }
 
@@ -68,10 +73,10 @@ void hoseOfNicolaus(){
 }
 
 int main(){
-	initLtc2656();
+	initILDA();
 	while(1){
-		//cicle();
-		hoseOfNicolaus();
+		cicle();
+		//hoseOfNicolaus();
 	}
 	closeLtc2656();
 	return 0;

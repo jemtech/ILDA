@@ -171,6 +171,14 @@ void setChVal(unsigned char channel, unsigned char valUpper, unsigned char valLo
 	SpiWriteAndRead(0, data, 3);
 }
 
+void setChVal_int(unsigned char channel, unsigned int val){
+	setChVal(channel, (unsigned char)(val>>8), val & 0xff);
+}
+
+void setChVal_float(unsigned char channel, float val){
+	setChVal_int(channel, val * 32768 + 32767);
+}
+
 void executeValues(){
 	digitalWrite (LDAC_PIN, LOW);
 	delayMicroseconds(1);

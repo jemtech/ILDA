@@ -12,4 +12,13 @@ unsigned char CH_G  = 0x00;
 unsigned char CH_B  = 0x04;
 unsigned char CH_C1 = 0x05;
 
+void initILDA();
+/*
+Set the positon in float values.
+The value 0 is the center.
+1 the max to the right on x and the max to top for y.
+-1 max left on x and max down on y.
+*/
+void moveTo(float x, float y);
+
 #endif
