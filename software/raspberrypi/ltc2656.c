@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include "ltc2656.h"
 #include <wiringPi.h>
 #include <stdlib.h>
 #include <fcntl.h>		//Needed for SPI port
 #include <sys/ioctl.h>		//Needed for SPI port
 #include <linux/spi/spidev.h>	//Needed for SPI port
 #include <unistd.h>		//Needed for SPI port (close)
+#include "ltc2656.h"
 
 int spi_cs0_fd;			//file descriptor for the SPI device
 int spi_cs1_fd;			//file descriptor for the SPI device
