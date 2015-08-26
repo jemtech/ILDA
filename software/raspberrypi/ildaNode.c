@@ -60,7 +60,7 @@ void moveToSpeedLimit(float x, float y, int distPerS){
 	}else{
 		micros = (dy / distPerS) * 1000000.0;
 	}
-	moveToTimed(float x, float y, micros);
+	moveToTimed(x, y, micros);
 }
 
 /*

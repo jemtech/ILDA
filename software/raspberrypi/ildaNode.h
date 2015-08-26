@@ -40,6 +40,6 @@ void moveToTimed(float x, float y, int micros);
 calculates the move-time based on the distance and distPerS
 distPerS is the distence per second (pps * 4)
 */
-void moveToSpeedLimit(float x, float y, int distPerS)
+void moveToSpeedLimit(float x, float y, int distPerS);
 
 #endif
