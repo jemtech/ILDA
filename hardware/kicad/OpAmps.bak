@@ -218,17 +218,15 @@ Connection ~ 1200 1700
 $Comp
 L CONN_2 P1
 U 1 1 53E1F188
-P 3700 2750
-F 0 "P1" V 3650 2750 40  0000 C CNN
-F 1 "Out X" V 3750 2750 40  0000 C CNN
-F 2 "" H 3700 2750 60  0001 C CNN
-F 3 "" H 3700 2750 60  0001 C CNN
-	1    3700 2750
+P 3950 2750
+F 0 "P1" V 3900 2750 40  0000 C CNN
+F 1 "Out X" V 4000 2750 40  0000 C CNN
+F 2 "" H 3950 2750 60  0001 C CNN
+F 3 "" H 3950 2750 60  0001 C CNN
+	1    3950 2750
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3250 2650 3350 2650
-Text Notes 3400 3200 0    60   ~ 0
+Text Notes 3650 3200 0    60   ~ 0
 ±4*(DA1-DARef)\n±5V\nDiff 0-10V
 $Comp
 L R-RESCUE-ildagenerator R5
@@ -286,17 +284,15 @@ Connection ~ 1300 5250
 $Comp
 L CONN_2 P2
 U 1 1 53E1F1C3
-P 3800 6300
-F 0 "P2" V 3750 6300 40  0000 C CNN
-F 1 "Out Y" V 3850 6300 40  0000 C CNN
-F 2 "" H 3800 6300 60  0001 C CNN
-F 3 "" H 3800 6300 60  0001 C CNN
-	1    3800 6300
+P 4100 6300
+F 0 "P2" V 4050 6300 40  0000 C CNN
+F 1 "Out Y" V 4150 6300 40  0000 C CNN
+F 2 "" H 4100 6300 60  0001 C CNN
+F 3 "" H 4100 6300 60  0001 C CNN
+	1    4100 6300
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3350 6200 3450 6200
-Text Notes 3500 6750 0    60   ~ 0
+Text Notes 3800 6750 0    60   ~ 0
 ±4*(DA2-DARef)\n±5V\nDiff 0-10V
 $Comp
 L R-RESCUE-ildagenerator R7
@@ -449,24 +445,12 @@ Wire Wire Line
 Wire Wire Line
 	6750 1700 6850 1700
 Wire Wire Line
-	6850 1700 6850 2500
-Connection ~ 6850 2500
-Wire Wire Line
-	7100 2700 7000 2700
-Wire Wire Line
 	5550 3200 5550 3650
 Wire Wire Line
 	5550 3650 6050 3650
 Connection ~ 5550 3200
 Wire Wire Line
-	7000 3650 6550 3650
-Wire Wire Line
 	4500 3200 4500 1500
-Wire Wire Line
-	7000 2700 7000 3650
-Wire Wire Line
-	7000 3000 6850 3000
-Connection ~ 7000 3000
 $Comp
 L GND-RESCUE-ildagenerator #PWR018
 U 1 1 53E1F37C
@@ -525,24 +509,12 @@ Wire Wire Line
 Wire Wire Line
 	6800 4150 6900 4150
 Wire Wire Line
-	6900 4150 6900 4950
-Connection ~ 6900 4950
-Wire Wire Line
-	7150 5150 7050 5150
-Wire Wire Line
 	5600 5650 5600 6100
 Wire Wire Line
 	5600 6100 6100 6100
 Connection ~ 5600 5650
 Wire Wire Line
-	7050 6100 6600 6100
-Wire Wire Line
 	4550 5650 4550 3950
-Wire Wire Line
-	7050 5150 7050 6100
-Wire Wire Line
-	7050 5450 6900 5450
-Connection ~ 7050 5450
 $Comp
 L LT1356CN U3
 U 2 1 53E1F3BC
@@ -669,24 +641,12 @@ Wire Wire Line
 Wire Wire Line
 	10100 1700 10200 1700
 Wire Wire Line
-	10200 1700 10200 2500
-Connection ~ 10200 2500
-Wire Wire Line
-	10450 2700 10350 2700
-Wire Wire Line
 	8900 3200 8900 3650
 Wire Wire Line
 	8900 3650 9400 3650
 Connection ~ 8900 3200
 Wire Wire Line
-	10350 3650 9900 3650
-Wire Wire Line
 	7850 3200 7850 1500
-Wire Wire Line
-	10350 2700 10350 3650
-Wire Wire Line
-	10350 3000 10200 3000
-Connection ~ 10350 3000
 $Comp
 L GND-RESCUE-ildagenerator #PWR021
 U 1 1 53E1F422
@@ -745,24 +705,12 @@ Wire Wire Line
 Wire Wire Line
 	10150 4150 10250 4150
 Wire Wire Line
-	10250 4150 10250 4950
-Connection ~ 10250 4950
-Wire Wire Line
-	10500 5150 10400 5150
-Wire Wire Line
 	8950 5650 8950 6100
 Wire Wire Line
 	8950 6100 9450 6100
 Connection ~ 8950 5650
 Wire Wire Line
-	10400 6100 9950 6100
-Wire Wire Line
 	7900 5650 7900 3950
-Wire Wire Line
-	10400 5150 10400 6100
-Wire Wire Line
-	10400 5450 10250 5450
-Connection ~ 10400 5450
 $Comp
 L LT1356CN U4
 U 2 1 53E1F462
@@ -913,9 +861,6 @@ Wire Wire Line
 	3050 2300 2750 2300
 Wire Wire Line
 	2750 2300 2750 2450
-Wire Wire Line
-	3250 1500 3250 2650
-Connection ~ 3250 2450
 $Comp
 L R-RESCUE-ildagenerator R15
 U 1 1 55BFA3B2
@@ -972,11 +917,6 @@ Wire Wire Line
 	3150 5850 2850 5850
 Wire Wire Line
 	2850 5850 2850 6000
-Wire Wire Line
-	3350 5050 3350 6200
-Connection ~ 3350 6000
-Wire Wire Line
-	3350 2850 3350 4250
 Wire Wire Line
 	3350 3600 3150 3600
 Connection ~ 3350 3600
@@ -1036,8 +976,6 @@ Wire Wire Line
 	3150 7600 2950 7600
 Wire Wire Line
 	2950 7600 2950 7750
-Wire Wire Line
-	3450 6400 3450 7750
 Wire Wire Line
 	3450 7150 3350 7150
 Connection ~ 3450 7150
@@ -1436,13 +1374,9 @@ Wire Wire Line
 Wire Wire Line
 	10050 1100 10050 1250
 Wire Wire Line
-	5550 2500 7100 2500
-Wire Wire Line
 	5550 2500 5550 1900
 Wire Wire Line
 	5400 2800 5650 2800
-Wire Wire Line
-	5600 4950 7150 4950
 Wire Wire Line
 	5600 4950 5600 4350
 Wire Wire Line
@@ -1450,13 +1384,235 @@ Wire Wire Line
 Wire Wire Line
 	8700 2800 9000 2800
 Wire Wire Line
-	8900 2500 10450 2500
-Wire Wire Line
 	8900 2500 8900 1900
-Wire Wire Line
-	8950 4950 10500 4950
 Wire Wire Line
 	8950 4950 8950 4350
 Wire Wire Line
 	8750 5250 9050 5250
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55DEDC4E
+P 3500 2400
+F 0 "R?" V 3580 2400 40  0000 C CNN
+F 1 "10kΩ" V 3507 2401 40  0000 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 3500 2400 60  0001 C CNN
+F 3 "" H 3500 2400 60  0001 C CNN
+	1    3500 2400
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55DEDD53
+P 3350 3100
+F 0 "R?" V 3450 3100 40  0000 C CNN
+F 1 "10kΩ" V 3357 3101 40  0000 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 3350 3100 60  0001 C CNN
+F 3 "" H 3350 3100 60  0001 C CNN
+	1    3350 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3600 2850 3350 2850
+Wire Wire Line
+	3350 3350 3350 4250
+Wire Wire Line
+	3250 2450 3250 1500
+Wire Wire Line
+	3500 2150 3250 2150
+Connection ~ 3250 2150
+Wire Wire Line
+	3500 2650 3600 2650
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E02ADD
+P 3600 5950
+F 0 "R?" V 3680 5950 40  0000 C CNN
+F 1 "10kΩ" V 3607 5951 40  0000 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 3600 5950 60  0001 C CNN
+F 3 "" H 3600 5950 60  0001 C CNN
+	1    3600 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E02BFC
+P 3450 6650
+F 0 "R?" V 3530 6650 40  0000 C CNN
+F 1 "10kΩ" V 3457 6651 40  0000 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" H 3450 6650 60  0001 C CNN
+F 3 "" H 3450 6650 60  0001 C CNN
+	1    3450 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 6400 3450 6400
+Wire Wire Line
+	3450 6900 3450 7750
+Wire Wire Line
+	3350 5050 3350 6000
+Wire Wire Line
+	3600 5700 3350 5700
+Connection ~ 3350 5700
+Wire Wire Line
+	3750 6200 3600 6200
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E130AE
+P 7050 4700
+F 0 "R?" V 7130 4700 40  0000 C CNN
+F 1 "10kΩ" V 7057 4701 40  0000 C CNN
+F 2 "" H 7050 4700 60  0001 C CNN
+F 3 "" H 7050 4700 60  0001 C CNN
+	1    7050 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E13217
+P 7050 5400
+F 0 "R?" V 7130 5400 40  0000 C CNN
+F 1 "10kΩ" V 7057 5401 40  0000 C CNN
+F 2 "" H 7050 5400 60  0001 C CNN
+F 3 "" H 7050 5400 60  0001 C CNN
+	1    7050 5400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6900 4150 6900 4950
+Wire Wire Line
+	6900 4950 5600 4950
+Wire Wire Line
+	7050 4450 6900 4450
+Connection ~ 6900 4450
+Wire Wire Line
+	7150 4950 7050 4950
+Wire Wire Line
+	6900 5450 6900 6100
+Wire Wire Line
+	6900 6100 6600 6100
+Wire Wire Line
+	7050 5650 6900 5650
+Connection ~ 6900 5650
+Wire Wire Line
+	7150 5150 7050 5150
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E210D5
+P 7000 2950
+F 0 "R?" V 7080 2950 40  0000 C CNN
+F 1 "10kΩ" V 7007 2951 40  0000 C CNN
+F 2 "" H 7000 2950 60  0001 C CNN
+F 3 "" H 7000 2950 60  0001 C CNN
+	1    7000 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6850 3000 6850 3650
+Wire Wire Line
+	6850 3650 6550 3650
+Wire Wire Line
+	7000 3200 6850 3200
+Connection ~ 6850 3200
+Wire Wire Line
+	7100 2700 7000 2700
+Wire Wire Line
+	6850 1700 6850 2500
+Wire Wire Line
+	6850 2500 5550 2500
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E22292
+P 7000 2250
+F 0 "R?" V 7080 2250 40  0000 C CNN
+F 1 "10kΩ" V 7007 2251 40  0000 C CNN
+F 2 "" H 7000 2250 60  0001 C CNN
+F 3 "" H 7000 2250 60  0001 C CNN
+	1    7000 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6850 2000 7000 2000
+Connection ~ 6850 2000
+Wire Wire Line
+	7100 2500 7000 2500
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E24449
+P 10350 2250
+F 0 "R?" V 10430 2250 40  0000 C CNN
+F 1 "10kΩ" V 10357 2251 40  0000 C CNN
+F 2 "" H 10350 2250 60  0001 C CNN
+F 3 "" H 10350 2250 60  0001 C CNN
+	1    10350 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10200 1700 10200 2500
+Wire Wire Line
+	10200 2500 8900 2500
+Wire Wire Line
+	10350 2000 10200 2000
+Connection ~ 10200 2000
+Wire Wire Line
+	10350 2500 10450 2500
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E25906
+P 10350 2950
+F 0 "R?" V 10430 2950 40  0000 C CNN
+F 1 "10kΩ" V 10357 2951 40  0000 C CNN
+F 2 "" H 10350 2950 60  0001 C CNN
+F 3 "" H 10350 2950 60  0001 C CNN
+	1    10350 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10350 2700 10450 2700
+Wire Wire Line
+	10200 3000 10200 3650
+Wire Wire Line
+	10200 3650 9900 3650
+Wire Wire Line
+	10350 3200 10200 3200
+Connection ~ 10200 3200
+Wire Wire Line
+	10250 5450 10250 6100
+Wire Wire Line
+	10250 6100 9950 6100
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E2D9FA
+P 10400 5400
+F 0 "R?" V 10480 5400 40  0000 C CNN
+F 1 "10kΩ" V 10407 5401 40  0000 C CNN
+F 2 "" H 10400 5400 60  0001 C CNN
+F 3 "" H 10400 5400 60  0001 C CNN
+	1    10400 5400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10400 5650 10250 5650
+Connection ~ 10250 5650
+Wire Wire Line
+	10400 5150 10500 5150
+$Comp
+L R-RESCUE-ildagenerator R?
+U 1 1 55E2ED6B
+P 10400 4700
+F 0 "R?" V 10480 4700 40  0000 C CNN
+F 1 "10kΩ" V 10407 4701 40  0000 C CNN
+F 2 "" H 10400 4700 60  0001 C CNN
+F 3 "" H 10400 4700 60  0001 C CNN
+	1    10400 4700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 4150 10250 4950
+Wire Wire Line
+	10250 4950 8950 4950
+Wire Wire Line
+	10400 4450 10250 4450
+Connection ~ 10250 4450
+Wire Wire Line
+	10400 4950 10500 4950
 $EndSCHEMATC
