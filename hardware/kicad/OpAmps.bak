@@ -148,7 +148,7 @@ P 2550 1500
 F 0 "U2" H 2700 1700 60  0000 C CNN
 F 1 "LT1356CN" H 2889 1300 60  0000 C CNN
 F 2 "" H 2550 1500 60  0001 C CNN
-F 3 "" H 2550 1500 60  0001 C CNN
+F 3 "http://cds.linear.com/docs/en/datasheet/13556fc.pdf" H 2550 1500 60  0001 C CNN
 	1    2550 1500
 	1    0    0    -1  
 $EndComp
@@ -226,7 +226,7 @@ F 3 "" H 3950 2750 60  0001 C CNN
 	1    3950 2750
 	1    0    0    -1  
 $EndComp
-Text Notes 3650 3200 0    60   ~ 0
+Text Notes 3700 3200 0    60   ~ 0
 ±4*(DA1-DARef)\n±5V\nDiff 0-10V
 $Comp
 L R-RESCUE-ildagenerator R5
@@ -346,7 +346,7 @@ P 5600 1500
 F 0 "U3" H 5750 1700 60  0000 C CNN
 F 1 "LT1356CN" H 5939 1300 60  0000 C CNN
 F 2 "" H 5600 1500 60  0001 C CNN
-F 3 "" H 5600 1500 60  0001 C CNN
+F 3 "http://cds.linear.com/docs/en/datasheet/13556fc.pdf" H 5600 1500 60  0001 C CNN
 	1    5600 1500
 	1    0    0    -1  
 $EndComp
@@ -508,7 +508,7 @@ P 8500 1500
 F 0 "U4" H 8650 1700 60  0000 C CNN
 F 1 "LT1356CN" H 8839 1300 60  0000 C CNN
 F 2 "" H 8500 1500 60  0001 C CNN
-F 3 "" H 8500 1500 60  0001 C CNN
+F 3 "http://cds.linear.com/docs/en/datasheet/13556fc.pdf" H 8500 1500 60  0001 C CNN
 	1    8500 1500
 	1    0    0    -1  
 $EndComp
@@ -1444,9 +1444,9 @@ L VR MOV1
 U 1 1 55E02D26
 P 3550 2400
 F 0 "MOV1" V 3610 2354 50  0000 C TNN
-F 1 "18V" V 3550 2400 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 3550 2400 60  0001 C CNN
-F 3 "" H 3550 2400 60  0000 C CNN
+F 1 "5.6V" V 3550 2400 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 3550 2400 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 3550 2400 60  0001 C CNN
 	1    3550 2400
 	1    0    0    -1  
 $EndComp
@@ -1475,9 +1475,9 @@ L VR MOV2
 U 1 1 55E043BE
 P 3550 3100
 F 0 "MOV2" V 3610 3054 50  0000 C TNN
-F 1 "18V" V 3550 3100 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 3550 3100 60  0001 C CNN
-F 3 "" H 3550 3100 60  0000 C CNN
+F 1 "5.6V" V 3550 3100 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 3550 3100 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 3550 3100 60  0001 C CNN
 	1    3550 3100
 	1    0    0    -1  
 $EndComp
@@ -1500,9 +1500,9 @@ L VR MOV3
 U 1 1 55E04D93
 P 3650 5950
 F 0 "MOV3" V 3710 5904 50  0000 C TNN
-F 1 "18V" V 3650 5950 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 3650 5950 60  0001 C CNN
-F 3 "" H 3650 5950 60  0000 C CNN
+F 1 "5.6V" V 3650 5950 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 3650 5950 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 3650 5950 60  0001 C CNN
 	1    3650 5950
 	1    0    0    -1  
 $EndComp
@@ -1531,9 +1531,9 @@ L VR MOV4
 U 1 1 55E05EBB
 P 3650 6650
 F 0 "MOV4" V 3710 6604 50  0000 C TNN
-F 1 "18V" V 3650 6650 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 3650 6650 60  0001 C CNN
-F 3 "" H 3650 6650 60  0000 C CNN
+F 1 "5.6V" V 3650 6650 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 3650 6650 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 3650 6650 60  0001 C CNN
 	1    3650 6650
 	1    0    0    -1  
 $EndComp
@@ -1556,9 +1556,9 @@ L VR MOV7
 U 1 1 55E064E2
 P 6600 2050
 F 0 "MOV7" V 6660 2004 50  0000 C TNN
-F 1 "18V" V 6600 2050 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 6600 2050 60  0001 C CNN
-F 3 "" H 6600 2050 60  0000 C CNN
+F 1 "5.6V" V 6600 2050 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 6600 2050 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 6600 2050 60  0001 C CNN
 	1    6600 2050
 	1    0    0    -1  
 $EndComp
@@ -1613,9 +1613,9 @@ L VR MOV8
 U 1 1 55E09301
 P 6600 2750
 F 0 "MOV8" V 6660 2704 50  0000 C TNN
-F 1 "18V" V 6600 2750 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 6600 2750 60  0001 C CNN
-F 3 "" H 6600 2750 60  0000 C CNN
+F 1 "5.6V" V 6600 2750 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 6600 2750 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 6600 2750 60  0001 C CNN
 	1    6600 2750
 	1    0    0    -1  
 $EndComp
@@ -1662,9 +1662,9 @@ L VR MOV5
 U 1 1 55E0C997
 P 6350 4250
 F 0 "MOV5" V 6410 4204 50  0000 C TNN
-F 1 "18V" V 6350 4250 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 6350 4250 60  0001 C CNN
-F 3 "" H 6350 4250 60  0000 C CNN
+F 1 "5.6V" V 6350 4250 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 6350 4250 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 6350 4250 60  0001 C CNN
 	1    6350 4250
 	1    0    0    -1  
 $EndComp
@@ -1693,9 +1693,9 @@ L VR MOV6
 U 1 1 55E0D872
 P 6350 4950
 F 0 "MOV6" V 6410 4904 50  0000 C TNN
-F 1 "18V" V 6350 4950 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 6350 4950 60  0001 C CNN
-F 3 "" H 6350 4950 60  0000 C CNN
+F 1 "5.6V" V 6350 4950 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 6350 4950 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 6350 4950 60  0001 C CNN
 	1    6350 4950
 	1    0    0    -1  
 $EndComp
@@ -1718,9 +1718,9 @@ L VR MOV9
 U 1 1 55E0E759
 P 9500 2050
 F 0 "MOV9" V 9560 2004 50  0000 C TNN
-F 1 "18V" V 9500 2050 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 9500 2050 60  0001 C CNN
-F 3 "" H 9500 2050 60  0000 C CNN
+F 1 "5.6V" V 9500 2050 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 9500 2050 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 9500 2050 60  0001 C CNN
 	1    9500 2050
 	1    0    0    -1  
 $EndComp
@@ -1731,9 +1731,9 @@ L VR MOV10
 U 1 1 55E0F7C5
 P 9500 2750
 F 0 "MOV10" V 9560 2704 50  0000 C TNN
-F 1 "18V" V 9500 2750 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 9500 2750 60  0001 C CNN
-F 3 "" H 9500 2750 60  0000 C CNN
+F 1 "5.6V" V 9500 2750 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 9500 2750 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 9500 2750 60  0001 C CNN
 	1    9500 2750
 	1    0    0    -1  
 $EndComp
@@ -1841,9 +1841,9 @@ L VR MOV11
 U 1 1 55E17827
 P 9550 4300
 F 0 "MOV11" V 9610 4254 50  0000 C TNN
-F 1 "18V" V 9550 4300 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 9550 4300 60  0001 C CNN
-F 3 "" H 9550 4300 60  0000 C CNN
+F 1 "5.6V" V 9550 4300 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 9550 4300 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 9550 4300 60  0001 C CNN
 	1    9550 4300
 	1    0    0    -1  
 $EndComp
@@ -1852,9 +1852,9 @@ L VR MOV12
 U 1 1 55E186EE
 P 9550 5000
 F 0 "MOV12" V 9610 4954 50  0000 C TNN
-F 1 "18V" V 9550 5000 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" H 9550 5000 60  0001 C CNN
-F 3 "" H 9550 5000 60  0000 C CNN
+F 1 "5.6V" V 9550 5000 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" H 9550 5000 60  0001 C CNN
+F 3 "http://cdn-reichelt.de/documents/datenblatt/B400/VC%201206_Serie.pdf" H 9550 5000 60  0001 C CNN
 	1    9550 5000
 	1    0    0    -1  
 $EndComp
