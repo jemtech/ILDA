@@ -166,9 +166,9 @@ int main(){
 				if(selction == 1){
 					cicle(0.5, 0, 0);
 				}else if(selction == 2){
-					hoseOfNicolaus();
-				}else if(selction == 3){
 					rotataitingCicle();
+				}else if(selction == 3){
+					hoseOfNicolaus();
 				}
 				int ch = getchar();
 				if(ch == 's'){
