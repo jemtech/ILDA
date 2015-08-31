@@ -10,6 +10,11 @@
 int spi_cs0_fd;			//file descriptor for the SPI device
 int spi_cs1_fd;			//file descriptor for the SPI device
 
+
+//SET SPI MODE
+unsigned char SPI_MODE = SPI_MODE_0; //SPI_MODE_0 (0,0) CPOL = 0, CPHA = 0, Clock idle low, data is clocked in on rising edge, output data (change) on falling edge
+
+
 //***********************************
 //***********************************
 //********** SPI OPEN PORT **********
@@ -52,28 +57,29 @@ int SpiOpenPort (int spi_device)
       exit(1);
     }
 
-    status_value = ioctl(*spi_cs_fd, SPI_IOC_WR_BITS_PER_WORD, &SPI_BITS_PER_WORD);
+	unsigned char bitsPerWord = SPI_BITS_PER_WORD;
+    status_value = ioctl(*spi_cs_fd, SPI_IOC_WR_BITS_PER_WORD, &bitsPerWord);
     if(status_value < 0)
     {
       perror("Could not set SPI bitsPerWord (WR)...ioctl fail");
       exit(1);
     }
 
-    status_value = ioctl(*spi_cs_fd, SPI_IOC_RD_BITS_PER_WORD, &SPI_BITS_PER_WORD);
+    status_value = ioctl(*spi_cs_fd, SPI_IOC_RD_BITS_PER_WORD, &bitsPerWord);
     if(status_value < 0)
     {
       perror("Could not set SPI bitsPerWord(RD)...ioctl fail");
       exit(1);
     }
-
-    status_value = ioctl(*spi_cs_fd, SPI_IOC_WR_MAX_SPEED_HZ, &SPI_SPEED);
+	unsigned int spiSpeed = SPI_SPEED;
+    status_value = ioctl(*spi_cs_fd, SPI_IOC_WR_MAX_SPEED_HZ, &spiSpeed);
     if(status_value < 0)
     {
       perror("Could not set SPI speed (WR)...ioctl fail");
       exit(1);
     }
 
-    status_value = ioctl(*spi_cs_fd, SPI_IOC_RD_MAX_SPEED_HZ, &SPI_SPEED);
+    status_value = ioctl(*spi_cs_fd, SPI_IOC_RD_MAX_SPEED_HZ, &spiSpeed);
     if(status_value < 0)
     {
       perror("Could not set SPI speed (RD)...ioctl fail");

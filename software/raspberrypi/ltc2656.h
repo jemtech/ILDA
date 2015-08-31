@@ -9,8 +9,6 @@ static const int SPI_DEV = 0;
 static const unsigned int SPI_SPEED = 50000000;//= 50MHz
 //SET BITS PER WORD
 static const unsigned char SPI_BITS_PER_WORD = 8;
-//SET SPI MODE
-unsigned char SPI_MODE = SPI_MODE_0; //SPI_MODE_0 (0,0) CPOL = 0, CPHA = 0, Clock idle low, data is clocked in on rising edge, output data (change) on falling edge
 static const char *SPIDEV_1_PATH = "/dev/spidev0.1";
 static const char *SPIDEV_0_PATH = "/dev/spidev0.0";
 

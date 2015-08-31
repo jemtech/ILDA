@@ -1,4 +1,8 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <termios.h>
+#include <fcntl.h>
+#include <stdlib.h>
 #include <math.h>
 #include <wiringPi.h>
 #include "ltc2656.h"
@@ -107,12 +111,72 @@ void hoseOfNicolaus(){
 	moveToTimed(HOUSE_SIZE, -1.0 * HOUSE_SIZE, HOUSE_WAIT_MICROS);
 }
 
+int selectWhatToDo(){
+	int  number;
+	printf("Type in the number to select:\n");
+	printf("0: quit\n");
+	printf("1: paint a cicle\n");
+	printf("2: paint a ciceling cicle\n");
+	printf("3: paint a house\n");
+	scanf("%d", &number);
+	return number;
+}
+
+struct termios stdin_orig;  // Structure to save parameters
+
+void term_reset() {
+        tcsetattr(STDIN_FILENO,TCSANOW,&stdin_orig);
+        tcsetattr(STDIN_FILENO,TCSAFLUSH,&stdin_orig);
+	int oldfl = fcntl(STDIN_FILENO, F_GETFL);
+	if (oldfl == -1) {
+	    /* handle error */
+	}
+	fcntl(STDIN_FILENO, F_SETFL, oldfl & ~O_NONBLOCK);
+}
+
+void term_nonblocking() {
+        struct termios newt;
+        if(tcgetattr(STDIN_FILENO, &stdin_orig) == -1){
+		perror("could not back up terminal settings");
+		return;
+	}
+        fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // non-blocking
+        newt = stdin_orig;
+        newt.c_lflag &= ~(ICANON | ECHO);
+        tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+        atexit(term_reset);
+}
+
 int main(){
 	initILDA();
-	while(1){
-		cicle(0.5, 0, 0);
-		//hoseOfNicolaus();
-		//rotataitingCicle();
+	int runMainLoop = 1;
+	while(runMainLoop){
+		int  selction = selectWhatToDo();
+		if(selction == 0){
+			runMainLoop = 0; //quiting
+		}else if(selction < 1 || selction > 3){
+			printf("%i is not a option.\n", selction);
+			//runMainLoop = 0; //quiting
+		}else{
+			term_nonblocking();
+			printf("Type 's' to stop painting.");
+			int runPaintLoop = 1;
+			while(runPaintLoop){
+				if(selction == 1){
+					cicle(0.5, 0, 0);
+				}else if(selction == 2){
+					hoseOfNicolaus();
+				}else if(selction == 3){
+					rotataitingCicle();
+				}
+				int ch = getchar();
+				if(ch == 's'){
+					runPaintLoop = 0;
+				}
+			}
+			term_reset();
+		}
 	}
 	endILDA();
 	return 0;
