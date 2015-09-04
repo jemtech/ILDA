@@ -1,23 +1,20 @@
-#if !defined(_ILDANODE_H)
-#define _ILDANODE_H 1
+#ifndef ILDANODE_H
+#define ILDANODE_H
 
-#if !defined(M_PI)
-#define M_PI 3.14159265358979323846
-#endif
 //chanal number for x movement
-unsigned char CH_X  = 0x03;
+static const unsigned char CH_X  = 0x03;
 //chanal number for y movement
-unsigned char CH_Y  = 0x02;
+static const unsigned char CH_Y  = 0x02;
 //chanal number for color red
-unsigned char CH_R  = 0x01;
+static const unsigned char CH_R  = 0x01;
 //chanal number for color green
-unsigned char CH_G  = 0x00;
+static const unsigned char CH_G  = 0x00;
 //chanal number for color blue
-unsigned char CH_B  = 0x04;
+static const unsigned char CH_B  = 0x04;
 //chanal number for custom color 1
-unsigned char CH_C1 = 0x05;
+static const unsigned char CH_C1 = 0x05;
 //time for one move in µs
-int MOVE_TIME_MICROS = 150;
+static const int MOVE_TIME_MICROS = 150;
 
 /*
 run this before any opration
@@ -41,5 +38,15 @@ calculates the move-time based on the distance and distPerS
 distPerS is the distence per second (pps * 4)
 */
 void moveToSpeedLimit(float x, float y, int distPerS);
+/*
+writes the values but not executes them.
+0 is off and 1 full on.
+with the "moveTo" functions the colour is also executed. 
+*/
+void setColour(float red, float green, float blue);
 
-#endif
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif /*M_PI*/
+
+#endif /*ILDANODE_H*/

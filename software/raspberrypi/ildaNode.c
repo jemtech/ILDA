@@ -5,7 +5,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <wiringPi.h>
+#include <string.h>
 #include "ltc2656.h"
+#include "ildaFile.h"
 #include "ildaNode.h"
 
 void initILDA(){
@@ -68,6 +70,15 @@ void moveToSpeedLimit(float x, float y, int distPerS){
 }
 
 /*
+writes the values but not execute them
+*/
+void setColour(float red, float green, float blue){
+	setChVal_float(CH_R, red);
+	setChVal_float(CH_G, green);
+	setChVal_float(CH_B, blue);
+}
+
+/*
 r radius of the cicle
 posX and posY center of the cicle
 */
@@ -118,6 +129,7 @@ int selectWhatToDo(){
 	printf("1: paint a cicle\n");
 	printf("2: paint a ciceling cicle\n");
 	printf("3: paint a house\n");
+	printf("4: execute ILDA-file\n");
 	scanf("%d", &number);
 	return number;
 }
@@ -148,6 +160,13 @@ void term_nonblocking() {
         atexit(term_reset);
 }
 
+void cleanStdin() {
+    int ch;
+    while ((ch = fgetc(stdin)) != EOF && ch != '\n') {
+        /* null body */;
+    }
+}
+
 int main(){
 	initILDA();
 	int runMainLoop = 1;
@@ -155,9 +174,17 @@ int main(){
 		int  selction = selectWhatToDo();
 		if(selction == 0){
 			runMainLoop = 0; //quiting
-		}else if(selction < 1 || selction > 3){
+		}else if(selction < 1 || selction > 4){
 			printf("%i is not a option.\n", selction);
 			//runMainLoop = 0; //quiting
+		}else if(selction == 4){
+			char fileName[256];
+			cleanStdin();
+			printf("Please enter filename:\n");
+			fgets(fileName, sizeof(fileName), stdin);
+			char* fileNameTmp = strtok(fileName, "\n");
+			printf("open file: \"%s\"\n", fileNameTmp);
+			executeIldaFileByName(fileNameTmp);
 		}else{
 			term_nonblocking();
 			printf("Type 's' to stop painting.");

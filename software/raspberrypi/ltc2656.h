@@ -1,6 +1,5 @@
-
-#if !defined(_LTC2656_H)
-#define _LTC2656_H 1
+#ifndef LTC2656_H
+#define LTC2656_H
 //GPOI pin for LDAC in wireingPi
 static const int LDAC_PIN = 7; // = P4
 //spi device 0=CS0, 1=CS1
@@ -20,4 +19,4 @@ void executeValues();
 void initLtc2656();
 void closeLtc2656();
 
-#endif
+#endif /*LTC2656_H*/

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <limits.h>
+#include "ildaNode.h"
+#include "ildaFile.h"
 
 struct colour {
 	char red;
@@ -8,21 +10,197 @@ struct colour {
 	char blue;
 };
 
+struct statusCode {
+	char blanking;
+	char lastEntry;
+};
+
 struct coordinateData {
 	int x;
 	int y;
 	int z;
 	struct statusCode status;
-}
-
-struct statusCode {
-	char colour;
-	char blanking;
-	char lastEntry;
+	//color from color table
+	char r;
+	char g;
+	char b;
 };
 
 // contains the actual colour table
 struct colour *colourTable;
+
+int readTwoByteInt(FILE *fp){
+	char ch = fgetc(fp);
+	int i = *(signed char *)(&ch);
+	i *= 1 << CHAR_BIT;
+	ch = fgetc(fp);
+	i |= ch;
+	return i;
+}
+
+/*
+MSB 0
+	Bit 0 is the "last point" bit. This bit is set to 0 for all points except the last point. A 1 indicates end of image data. This was done for compatibility with certain existing systems; note that a zero in bytes 25-26 (Total Points) is the official end-of-file indication.
+	Bit 1 is the blanking bit. If this is a 0, then the laser is on (draw). If this is a 1, then the laser is off (blank). Note that all systems must write this bit, even if a particular system uses only bits 0-7 for blanking/colour information.
+	Bits 2-7 are unassigned and should be set to 0 (reserved).
+*/
+struct statusCode readStatusCode(FILE *fp){
+	char ch = fgetc(fp);
+	struct statusCode status;
+	status.lastEntry = (((ch & 0x80) >> 7) == 1);
+	status.blanking = (((ch & 0x40) >> 6) == 1);
+}
+
+int distPerS = 10000;
+float ILDA_AxisMax = 32768.0;
+float ILDA_Colour_Max = 255.0;
+void executeCoordCommand(struct coordinateData *data){
+	float x = (*data).x / ILDA_AxisMax;
+	float y = (*data).y / ILDA_AxisMax;
+	if((*data).status.blanking = 0){
+			float red = (*data).r / ILDA_Colour_Max;
+			float green = (*data).g / ILDA_Colour_Max;
+			float blue = (*data).b / ILDA_Colour_Max;
+			setColour(red, green, blue);
+	}else{
+		setColour(0.0, 0.0, 0.0);
+	}
+	moveToSpeedLimit(x, y, distPerS);
+}
+
+void readRGBByColourIndex(FILE *fp, struct coordinateData *data){
+		char colour = fgetc(fp);
+		if(colourTable == NULL ){
+			// no colour Tabel use default
+			(*data).r = ILDA_DEFAULT_COLOUR_PALETTE[colour][0];
+			(*data).g = ILDA_DEFAULT_COLOUR_PALETTE[colour][1];
+			(*data).b = ILDA_DEFAULT_COLOUR_PALETTE[colour][2];
+		}else{
+			(*data).r = colourTable[colour].red;
+			(*data).g = colourTable[colour].green;
+			(*data).b = colourTable[colour].blue;
+		}
+}
+
+/*
+	0-1 	X coordinate 	A 16-bit binary twos complement (signed) number. Extreme left is -32768; extreme right is +32767. (All directions stated using front projection.)
+	
+	2-3 	Y coordinate 	A 16-bit binary twos complement (signed) number. Extreme bottom is -32768; extreme top is +32767.
+
+	4-5 	Z coordinate 	A 16-bit binary twos complement (signed) number. Extreme rear (away from viewer; behind screen) is -32768; extreme front (towards viewer; in front of screen) is +32767.
+
+	6 	Status code (MSB 0)
+			Bit 0 is the "last point" bit. This bit is set to 0 for all points except the last point. A 1 indicates end of image data. This was done for compatibility with certain existing systems; note that a zero in bytes 25-26 (Total Points) is the official end-of-file indication.
+			Bit 1 is the blanking bit. If this is a 0, then the laser is on (draw). If this is a 1, then the laser is off (blank). Note that all systems must write this bit, even if a particular system uses only bits 0-7 for blanking/colour information.
+			Bits 2-7 are unassigned and should be set to 0 (reserved).
+
+	7	ColourIndex
+			0-255 indicate the point's colour number. This value is used as an index into a colour lookup table containing red, green and blue values. See ILDA Colour Lookup Table Header section for more information.
+*/
+
+void parse3DCoordData(FILE *fp, int numberEntries){
+
+	for(int i = 0; i<numberEntries; i++){
+		struct coordinateData data;
+		data.x = readTwoByteInt(fp);
+		data.y = readTwoByteInt(fp);
+		data.z = readTwoByteInt(fp);
+		data.status = readStatusCode(fp);
+		readRGBByColourIndex(fp, &data);
+		//execute
+		executeCoordCommand(&data);
+	}
+}
+
+/*
+	0-1 	X coordinate
+	2-3 	Y coordinate
+	4 	Status code
+	5	ColourIndex
+*/
+void parse2DCoordData(FILE *fp, int numberEntries){
+	for(int i = 0; i<numberEntries; i++){
+		struct coordinateData data;
+		data.x = readTwoByteInt(fp);
+		data.y = readTwoByteInt(fp);
+		data.z = 0;
+		data.status = readStatusCode(fp);
+		readRGBByColourIndex(fp, &data);
+		//execute
+		executeCoordCommand(&data);
+	}
+}
+
+
+/*	
+	0 	Red value 	Intensity value of red. Value ranges from 0 (off) to 255 (full on).
+	1 	Green value 	Intensity value of green.
+	2 	Blue value 	Intensity value of blue.
+*/
+void parseColourPaletteData(FILE *fp, int numberEntries){
+	struct colour newColourTable[numberEntries];
+	for(int i = 0; i<numberEntries; i++){
+		newColourTable[i].red = fgetc(fp);
+		newColourTable[i].green = fgetc(fp);
+		newColourTable[i].blue = fgetc(fp);
+	}
+	free(colourTable);
+	colourTable = newColourTable;
+}
+
+/*
+	0-1 	X coordinate
+	2-3 	Y coordinate
+	4-5 	z coordinate
+	6 	Status code
+	7	blue
+			This value is the point’s blue color component.  A value of 0 indicates “zero brightness”
+and a value of 255 indicates “maximum brightness”.
+	8	green
+			This value is the point’s green color component. A value of 0 indicates “zero brightness”
+and a value of 255 indicates “maximum brightness”.
+	9	red
+			This value is the point’s red color component.  A value of 0 indicates “zero brightness”
+and a value of 255 indicates “maximum brightness”.
+*/
+void parse3DCoordTrueColData(FILE *fp, int numberEntries){
+
+	for(int i = 0; i<numberEntries; i++){
+		struct coordinateData data;
+		data.x = readTwoByteInt(fp);
+		data.y = readTwoByteInt(fp);
+		data.z = readTwoByteInt(fp);
+		data.status = readStatusCode(fp);
+		data.b = fgetc(fp);
+		data.g = fgetc(fp);
+		data.r = fgetc(fp);
+		//execute
+		executeCoordCommand(&data);
+	}
+}
+
+/*
+	0-1 	X coordinate
+	2-3 	Y coordinate
+	4 	Status code
+	5	blue
+	6	green
+	7	red
+*/
+void parse2DCoordTrueColData(FILE *fp, int numberEntries){
+	for(int i = 0; i<numberEntries; i++){
+		struct coordinateData data;
+		data.x = readTwoByteInt(fp);
+		data.y = readTwoByteInt(fp);
+		data.z = 0;
+		data.status = readStatusCode(fp);
+		data.b = fgetc(fp);
+		data.g = fgetc(fp);
+		data.r = fgetc(fp);
+		//execute
+		executeCoordCommand(&data);
+	}
+}
 
 /*
 	0 to 3 	Signature ("ILDA") 	This makes a positive identification that this is the start of a header section, it should be the ASCII characters "ILDA". It can also be used to quickly identify a file as a valid ILDA file since the first section of such a file must be a header section.
@@ -50,7 +228,6 @@ void executeIldaFile(FILE *fp){
 		perror("Error no file.\n");
 		return;
 	}
-	char ch;//actual byte
 	int state = PARSE_STATE_SEARCHING_HEADER;
 	unsigned int byteNr = 0;
 	char dataType;
@@ -60,7 +237,9 @@ void executeIldaFile(FILE *fp){
 	int number;
 	int totalNumber;
 	char scannerHead;
-	while( ( ch = fgetc(fp) ) != EOF ){
+	int chTmp;
+	while( ( chTmp = fgetc(fp) ) != EOF){
+		char ch = chTmp;//actual byte
 		if(state == PARSE_STATE_SEARCHING_HEADER){
 			if(ch == HEADER_START[byteNr]){
 				//match go next
@@ -102,6 +281,10 @@ void executeIldaFile(FILE *fp){
 					parse2DCoordData(fp, numberOfDataEntries);
 				}else if(dataType == ILDA_COLOUR_PALETTE_HEADER_TYPE){
 					parseColourPaletteData(fp, numberOfDataEntries);
+				}else if(dataType == ILDA_3D_COORD_TRUE_COL_HEADER_TYPE){
+					parse3DCoordTrueColData(fp, numberOfDataEntries);
+				}else if(dataType == ILDA_2D_COORD_TRUE_COL_HEADER_TYPE){
+					parse2DCoordTrueColData(fp, numberOfDataEntries);
 				}else{
 					printf("Ignorring unknowm Data Type: %i\n", (int) dataType);
 				}
@@ -115,93 +298,13 @@ void executeIldaFile(FILE *fp){
 	}
 }
 
-/*
-	0-1 	X coordinate 	A 16-bit binary twos complement (signed) number. Extreme left is -32768; extreme right is +32767. (All directions stated using front projection.)
-	
-	2-3 	Y coordinate 	A 16-bit binary twos complement (signed) number. Extreme bottom is -32768; extreme top is +32767.
-
-	4-5 	Z coordinate 	A 16-bit binary twos complement (signed) number. Extreme rear (away from viewer; behind screen) is -32768; extreme front (towards viewer; in front of screen) is +32767.
-
-	6-7 	Status code 
-			Bits 0-7 (lsb) indicate the point's colour number. This value is used as an index into a colour lookup table containing red, green and blue values. See ILDA Colour Lookup Table Header section for more information.
-			Bits 8-13 are unassigned and should be set to 0 (reserved).
-			Bit 14 is the blanking bit. If this is a 0, then the laser is on (draw). If this is a 1, then the laser is off (blank). Note that all systems must write this bit, even if a particular system uses only bits 0-7 for blanking/colour information.
-			Bit 15 (msb) is the "last point" bit. This bit is set to 0 for all points except the last point. A 1 indicates end of image data. This was done for compatibility with certain existing systems; note that a zero in bytes 25-26 (Total Points) is the official end-of-file indication.
-*/
-
-void parse3DCoordData(FILE *fp, int numberEntries){
-
-	for(int i = 0; i<numberEntries; i++){
-		struct coordinateData data;
-		data.x = readTwoByteInt(fp);
-		data.y = readTwoByteInt(fp);
-		data.z = readTwoByteInt(fp);
-		data.status = readStatusCode(fp);
-	}
-}
-
-int readTwoByteInt(FILE *fp){
-	char ch = fgetc(fp);
-	int i = *(signed char *)(&ch);
-	i *= 1 << CHAR_BIT;
-	ch = fgetc(fp);
-	i |= ch;
-	return i;
-}
-
-
-struct statusCode readStatusCode(FILE *fp){
-	char ch = fgetc(fp);
-	struct statusCode status;
-	status.colour = 0;
-	status.colour |= (ch & 0x80)>>7;//get first, move it to the end and set
-	status.colour |= (ch & 0x40)>>5;//get second, move it 5 and set
-	status.colour |= (ch & 0x20)>>3;
-	status.colour |= (ch & 0x10)>>1;
-	status.colour |= (ch & 0x08)<<1;
-	status.colour |= (ch & 0x04)<<3;
-	status.colour |= (ch & 0x02)<<5;
-	status.colour |= (ch & 0x01)<<7;
-	ch = fgetc(fp);
-	status.blanking = (ch & 0x02)>>1;
-	status.lastEntry = ((ch & 0x01) == 1);
-}
-
-/*
-	0-1 	X coordinate
-	2-3 	Y coordinate
-	4-5 	Status code
-*/
-void parse2DCoordData(FILE *fp, int numberEntries){
-	for(int i = 0; i<numberEntries; i++){
-		struct coordinateData data;
-		data.x = readTwoByteInt(fp);
-		data.y = readTwoByteInt(fp);
-		data.z = 0;
-		data.status = readStatusCode(fp);
-	}
-}
-
-
-/*	
-	0 	Red value 	Intensity value of red. Value ranges from 0 (off) to 255 (full on).
-	1 	Green value 	Intensity value of green.
-	2 	Blue value 	Intensity value of blue.
-*/
-void parseColourPaletteData(FILE *fp, int numberEntries){
-	struct colour newColourTable[numberEntries];
-	for(int i = 0; i<numberEntries; i++){
-		newColourTable[i].red = fgetc(fp);
-		newColourTable[i].green = fgetc(fp);
-		newColourTable[i].blue = fgetc(fp);
-	}
-	free(colourTable);
-	colourTable = newColourTable;
-}
-
-void executeIldaFileByName(char filename[]){
+void executeIldaFileByName(char fileName[]){
 	FILE *fp;
-	fp = fopen(file_name,"r"); // read mode
-	executeIldaFile(fp);
-	fclose(fp);
+	fp = fopen(fileName,"r"); // read mode
+	if( fp != NULL ){
+		executeIldaFile(fp);
+		fclose(fp);
+	}else{
+		printf("---ERROR---\ncan't open file: \"%s\"\n\n", fileName);
+	}
 }
