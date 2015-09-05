@@ -51,7 +51,7 @@ struct statusCode readStatusCode(FILE *fp){
 	status.blanking = (((ch & 0x40) >> 6) == 1);
 }
 
-int distPerS = 10000;
+int distPerS = 100000;
 float ILDA_AxisMax = 32768.0;
 float ILDA_Colour_Max = 255.0;
 void executeCoordCommand(struct coordinateData *data){
@@ -65,7 +65,8 @@ void executeCoordCommand(struct coordinateData *data){
 	}else{
 		setColour(0.0, 0.0, 0.0);
 	}
-	moveToSpeedLimit(x, y, distPerS);
+	moveTo(x, y);
+	//moveToSpeedLimit(x, y, distPerS);
 }
 
 void readRGBByColourIndex(FILE *fp, struct coordinateData *data){
@@ -223,86 +224,96 @@ void parse2DCoordTrueColData(FILE *fp, int numberEntries){
 
 	31 	Not used 	Supposed to be set to
 */
-void executeIldaFile(FILE *fp){
+void executeIldaFile(FILE *fp, char loop){
 	if( fp == NULL ){
 		perror("Error no file.\n");
 		return;
 	}
-	int state = PARSE_STATE_SEARCHING_HEADER;
-	unsigned int byteNr = 0;
-	char dataType;
-	char name[8];
-	char companyName[8];
-	int numberOfDataEntries;
-	int number;
-	int totalNumber;
-	char scannerHead;
-	int chTmp;
-	while( ( chTmp = fgetc(fp) ) != EOF){
-		char ch = chTmp;//actual byte
-		if(state == PARSE_STATE_SEARCHING_HEADER){
-			if(ch == HEADER_START[byteNr]){
-				//match go next
-				byteNr++;
-				if(byteNr == 7){
-					//header identified start parsing heder info
-					state = PARSE_STATE_PARSING_HEADER;
-				}
-			}else{
-				//no match
-				byteNr = 0;
-			}	
-		} else if(state == PARSE_STATE_PARSING_HEADER){
-			if(byteNr == 7){
-				dataType = ch;
-			}else if(byteNr < 16){
-				name[byteNr-8] = ch;
-			}else if(byteNr < 24){
-				companyName[byteNr-16] = ch;
-			}else if(byteNr == 24){
-				numberOfDataEntries = 256*ch;
-			}else if(byteNr == 25){
-				numberOfDataEntries += ch;
-			}else if(byteNr == 26){
-				number = 256*ch;
-			}else if(byteNr == 27){
-				number += ch;
-			}else if(byteNr == 28){
-				totalNumber = 256*ch;
-			}else if(byteNr == 29){
-				totalNumber += ch;
-			}else if(byteNr == 30){
-				scannerHead = ch;
-			}else if(byteNr == 31){
-				//last (not used) header byte: Data beginns
-				if(dataType == ILDA_3D_COORD_HEADER_TYPE){
-					parse3DCoordData(fp, numberOfDataEntries);
-				}else if(dataType == ILDA_2D_COORD_HEADER_TYPE){
-					parse2DCoordData(fp, numberOfDataEntries);
-				}else if(dataType == ILDA_COLOUR_PALETTE_HEADER_TYPE){
-					parseColourPaletteData(fp, numberOfDataEntries);
-				}else if(dataType == ILDA_3D_COORD_TRUE_COL_HEADER_TYPE){
-					parse3DCoordTrueColData(fp, numberOfDataEntries);
-				}else if(dataType == ILDA_2D_COORD_TRUE_COL_HEADER_TYPE){
-					parse2DCoordTrueColData(fp, numberOfDataEntries);
+	term_nonblocking();
+	printf("Type 's' to stop painting.");
+	do{
+		rewind(fp);
+		int state = PARSE_STATE_SEARCHING_HEADER;
+		unsigned int byteNr = 0;
+		char dataType;
+		char name[8];
+		char companyName[8];
+		int numberOfDataEntries;
+		int number;
+		int totalNumber;
+		char scannerHead;
+		int chTmp;
+		while( ( chTmp = fgetc(fp) ) != EOF){
+			char ch = chTmp;//actual byte
+			if(state == PARSE_STATE_SEARCHING_HEADER){
+				if(ch == HEADER_START[byteNr]){
+					//match go next
+					byteNr++;
+					if(byteNr == 7){
+						//header identified start parsing heder info
+						state = PARSE_STATE_PARSING_HEADER;
+					}
 				}else{
-					printf("Ignorring unknowm Data Type: %i\n", (int) dataType);
+					//no match
+					byteNr = 0;
+				}	
+			} else if(state == PARSE_STATE_PARSING_HEADER){
+				if(byteNr == 7){
+					dataType = ch;
+				}else if(byteNr < 16){
+					name[byteNr-8] = ch;
+				}else if(byteNr < 24){
+					companyName[byteNr-16] = ch;
+				}else if(byteNr == 24){
+					numberOfDataEntries = 256*ch;
+				}else if(byteNr == 25){
+					numberOfDataEntries += ch;
+				}else if(byteNr == 26){
+					number = 256*ch;
+				}else if(byteNr == 27){
+					number += ch;
+				}else if(byteNr == 28){
+					totalNumber = 256*ch;
+				}else if(byteNr == 29){
+					totalNumber += ch;
+				}else if(byteNr == 30){
+					scannerHead = ch;
+				}else if(byteNr == 31){
+					//last (not used) header byte: Data beginns
+					if(dataType == ILDA_3D_COORD_HEADER_TYPE){
+						parse3DCoordData(fp, numberOfDataEntries);
+					}else if(dataType == ILDA_2D_COORD_HEADER_TYPE){
+						parse2DCoordData(fp, numberOfDataEntries);
+					}else if(dataType == ILDA_COLOUR_PALETTE_HEADER_TYPE){
+						parseColourPaletteData(fp, numberOfDataEntries);
+					}else if(dataType == ILDA_3D_COORD_TRUE_COL_HEADER_TYPE){
+						parse3DCoordTrueColData(fp, numberOfDataEntries);
+					}else if(dataType == ILDA_2D_COORD_TRUE_COL_HEADER_TYPE){
+						parse2DCoordTrueColData(fp, numberOfDataEntries);
+					}else{
+						printf("Ignorring unknowm Data Type: %i\n", (int) dataType);
+					}
+					//data is parsed start again
+					state = PARSE_STATE_SEARCHING_HEADER;
+					byteNr = -1;
 				}
-				//data is parsed start again
-				state = PARSE_STATE_SEARCHING_HEADER;
-				byteNr = -1;
+				byteNr++;
 			}
-			byteNr++;
-		}
 		
+		}
+	int userIn = getchar();
+	if(userIn == 's'){
+		loop = 0;
 	}
+	}while(loop);
+	term_reset();
 }
 
-void executeIldaFileByName(char fileName[]){
+void executeIldaFileByName(char fileName[], char loop){
 	FILE *fp;
 	fp = fopen(fileName,"r"); // read mode
 	if( fp != NULL ){
-		executeIldaFile(fp);
+		executeIldaFile(fp, loop);
 		fclose(fp);
 	}else{
 		printf("---ERROR---\ncan't open file: \"%s\"\n\n", fileName);

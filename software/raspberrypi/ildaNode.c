@@ -20,16 +20,23 @@ void endILDA(){
 
 float lastX = 0.0;
 float lastY = 0.0;
-
+float scaleX = 1.0;
+float scaleY = 1.0;
+int delayMicroS = 0;
 /*
 mesured speed 0.15ms (~6.6kpps)
 */
 void moveTo(float x, float y){
-	lastX = x;
-	lastY = y;
-	setChVal_float(CH_X, x);
-	setChVal_float(CH_Y, y);
-	
+	x *= scaleX;
+	y *= scaleY;
+	if(lastX != x){
+		lastX = x;
+		setChVal_float(CH_X, x);
+	}
+	if(lastY != y){
+		lastY = y;
+		setChVal_float(CH_Y, y);
+	}
 	executeValues();
 }
 
@@ -69,13 +76,25 @@ void moveToSpeedLimit(float x, float y, int distPerS){
 	moveToTimed(x, y, micros);
 }
 
+float lastRed = 0.0;
+float lastGreen = 0.0;
+float lastBlue = 0.0;
 /*
 writes the values but not execute them
 */
 void setColour(float red, float green, float blue){
-	setChVal_float(CH_R, red);
-	setChVal_float(CH_G, green);
-	setChVal_float(CH_B, blue);
+	if(lastRed != red){
+		setChVal_float(CH_R, red);
+		lastRed = red;
+	}
+	if(lastGreen != green){
+		setChVal_float(CH_G, green);
+		lastGreen = green;
+	}
+	if(lastBlue != blue){
+		setChVal_float(CH_B, blue);
+		lastBlue = blue;
+	}
 }
 
 /*
@@ -130,6 +149,7 @@ int selectWhatToDo(){
 	printf("2: paint a ciceling cicle\n");
 	printf("3: paint a house\n");
 	printf("4: execute ILDA-file\n");
+	printf("5: options\n");
 	scanf("%d", &number);
 	return number;
 }
@@ -167,6 +187,28 @@ void cleanStdin() {
     }
 }
 
+void options(){
+	printf("Type in the number to select:\n");
+	printf("0: back\n");
+	printf("1: scale X\n");
+	printf("2: scale Y\n");
+	int  selction;
+	scanf("%d", &selction);
+	if(selction == 0){
+		return;
+	}else if(selction == 1){
+		printf("Actual x scaling: %f\n", scaleX);
+		printf("Enter new: ");
+		scanf("%f", &scaleX);
+	}else if(selction == 2){
+		printf("Actual y scaling: %f\n", scaleY);
+		printf("Enter new: ");
+		scanf("%f", &scaleY);
+	}else{
+		printf("%i is not a option.\n", selction);
+	}
+}
+
 int main(){
 	initILDA();
 	int runMainLoop = 1;
@@ -174,9 +216,11 @@ int main(){
 		int  selction = selectWhatToDo();
 		if(selction == 0){
 			runMainLoop = 0; //quiting
-		}else if(selction < 1 || selction > 4){
+		}else if(selction < 1 || selction > 5){
 			printf("%i is not a option.\n", selction);
 			//runMainLoop = 0; //quiting
+		}else if(selction == 5){
+			options();
 		}else if(selction == 4){
 			char fileName[256];
 			cleanStdin();
@@ -184,7 +228,7 @@ int main(){
 			fgets(fileName, sizeof(fileName), stdin);
 			char* fileNameTmp = strtok(fileName, "\n");
 			printf("open file: \"%s\"\n", fileNameTmp);
-			executeIldaFileByName(fileNameTmp);
+			executeIldaFileByName(fileNameTmp, 1);
 		}else{
 			term_nonblocking();
 			printf("Type 's' to stop painting.");

@@ -14,7 +14,7 @@ static const char HEADER_START[] = {'I','L','D','A',0x00,0x00,0x00};
 /*
 Execute this function to parse a ILDA-formated file and run its commands
 */
-void executeIldaFileByName(char fileName[]);
+void executeIldaFileByName(char fileName[], char loop);
 
 // ilda standard color palette (r,g,b)
 static const unsigned char ILDA_DEFAULT_COLOUR_PALETTE[256][3]={

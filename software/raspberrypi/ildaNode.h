@@ -45,6 +45,9 @@ with the "moveTo" functions the colour is also executed.
 */
 void setColour(float red, float green, float blue);
 
+void term_nonblocking();
+void term_reset();
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif /*M_PI*/
