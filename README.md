@@ -5,7 +5,7 @@ The DAC is controlled via [SPI](https://en.wikipedia.org/wiki/Serial_Peripheral_
 
 This project contains two sections:
 
-1. Hardware: In this section you find a 16bit 6ch DAC for ILDA. Reaching 6.6kpps (measured, theoretical up to 400kpps) limited by the controling "Raspberry Pi". It is resulting in a resolution of 4294967296 positions (~4295 megapixels).
+1. Hardware: In this section you find a 16bit 6ch DAC for ILDA. Reaching 22kpps (measured with [ILDA Test Pattern](http://www.laserist.org/StandardsDocs/ILDA_TestPattern95_rev002.pdf), theoretical up to 400kpps) limited by the controling "Raspberry Pi". It is resulting in a resolution of 4294967296 positions (~4295 megapixels).
 The asynchronous LDAC update pin at the DAC, immediately updates the DAC register with the contents of the input register, so all outputs change at the same time and can be synchronised with an external clock.
 2. Software: C based software to control the ILDA-DAC with a "Raspberry Pi". Supports all Files based on the [ILDA Image Data Transfer Format](http://www.laserist.org/StandardsDocs/ILDA_IDTF14_rev011.pdf).
 
