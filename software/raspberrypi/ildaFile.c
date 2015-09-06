@@ -258,46 +258,40 @@ void executeIldaFile(FILE *fp, char loop){
 					byteNr = 0;
 				}	
 			} else if(state == PARSE_STATE_PARSING_HEADER){
-				if(byteNr == 7){
-					dataType = ch;
-				}else if(byteNr < 16){
-					name[byteNr-8] = ch;
-				}else if(byteNr < 24){
-					companyName[byteNr-16] = ch;
-				}else if(byteNr == 24){
-					numberOfDataEntries = 256*ch;
-				}else if(byteNr == 25){
-					numberOfDataEntries += ch;
-				}else if(byteNr == 26){
-					number = 256*ch;
-				}else if(byteNr == 27){
-					number += ch;
-				}else if(byteNr == 28){
-					totalNumber = 256*ch;
-				}else if(byteNr == 29){
-					totalNumber += ch;
-				}else if(byteNr == 30){
-					scannerHead = ch;
-				}else if(byteNr == 31){
-					//last (not used) header byte: Data beginns
-					if(dataType == ILDA_3D_COORD_HEADER_TYPE){
-						parse3DCoordData(fp, numberOfDataEntries);
-					}else if(dataType == ILDA_2D_COORD_HEADER_TYPE){
-						parse2DCoordData(fp, numberOfDataEntries);
-					}else if(dataType == ILDA_COLOUR_PALETTE_HEADER_TYPE){
-						parseColourPaletteData(fp, numberOfDataEntries);
-					}else if(dataType == ILDA_3D_COORD_TRUE_COL_HEADER_TYPE){
-						parse3DCoordTrueColData(fp, numberOfDataEntries);
-					}else if(dataType == ILDA_2D_COORD_TRUE_COL_HEADER_TYPE){
-						parse2DCoordTrueColData(fp, numberOfDataEntries);
-					}else{
-						printf("Ignorring unknowm Data Type: %i\n", (int) dataType);
-					}
-					//data is parsed start again
-					state = PARSE_STATE_SEARCHING_HEADER;
-					byteNr = -1;
-				}
+				dataType = ch;
 				byteNr++;
+				while(byteNr < 16){
+					name[byteNr-8] = fgetc(fp);
+					byteNr++;
+				}
+				while(byteNr < 24){
+					name[byteNr-8] = fgetc(fp);
+					byteNr++;
+				}
+				numberOfDataEntries = 256*fgetc(fp);
+				numberOfDataEntries += fgetc(fp);
+				number = 256*fgetc(fp);
+				number += fgetc(fp);
+				totalNumber = 256*fgetc(fp);
+				totalNumber += fgetc(fp);
+				scannerHead = fgetc(fp);
+				fgetc(fp);//byte 31: last (not used) header byte: Data beginns
+				if(dataType == ILDA_3D_COORD_HEADER_TYPE){
+					parse3DCoordData(fp, numberOfDataEntries);
+				}else if(dataType == ILDA_2D_COORD_HEADER_TYPE){
+					parse2DCoordData(fp, numberOfDataEntries);
+				}else if(dataType == ILDA_COLOUR_PALETTE_HEADER_TYPE){
+					parseColourPaletteData(fp, numberOfDataEntries);
+				}else if(dataType == ILDA_3D_COORD_TRUE_COL_HEADER_TYPE){
+					parse3DCoordTrueColData(fp, numberOfDataEntries);
+				}else if(dataType == ILDA_2D_COORD_TRUE_COL_HEADER_TYPE){
+					parse2DCoordTrueColData(fp, numberOfDataEntries);
+				}else{
+					printf("Ignorring unknowm Data Type: %i\n", (int) dataType);
+				}
+				//data is parsed start again
+				state = PARSE_STATE_SEARCHING_HEADER;
+				byteNr = 0;
 			}
 		
 		}
