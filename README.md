@@ -10,7 +10,7 @@ The asynchronous LDAC update pin at the DAC, immediately updates the DAC registe
 2. Software: C based software to control the ILDA-DAC with a "Raspberry Pi". Supports all Files based on the [ILDA Image Data Transfer Format](http://www.laserist.org/StandardsDocs/ILDA_IDTF14_rev011.pdf).
 
 ## Hardware
-The hardware is designed with [KiCad](http://kicad-pcb.org/).
+The hardware is designed with [KiCad](http://kicad.org/).
 "ILDA/hardware/kicad/"
 Using 5 channels (x,y,r,g,b) with 16bit at 50MHz SPI speed the DAC reaches theoretically 400kpps (50000KHz ÷ (5×24bit) = 416kpps).
 
